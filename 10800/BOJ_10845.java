@@ -15,7 +15,6 @@ public class Main {
 	private static final int EMPTY	= 4;
 	private static final int FRONT	= 5;
 	private static final int BACK 	= 6;
-	private static boolean onlyPushCheck = true;
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -64,10 +63,7 @@ public class Main {
 			default :
 				// TEST CASE ERROR
 			}				
-		}
-		
-		if (onlyPushCheck)
-			bw.write("\n");
+		}		
 		
 		bw.flush();
 		br.close();
@@ -75,9 +71,6 @@ public class Main {
 	}
 
 	private static int getOrder(String s) {
-		if (!s.equals("push"))
-			onlyPushCheck = false;
-		
 		if (s.equals("push"))
 			return PUSH;
 		if (s.equals("pop"))
