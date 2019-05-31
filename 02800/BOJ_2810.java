@@ -27,7 +27,7 @@ public class Main {
 			}
 		}
 		
-		bw.write((cnt<n?cnt:n) + "\n");
+		bw.write((cnt<n?cnt:n) + "\n"); 
 		
 		bw.flush();		
 		bw.close();
