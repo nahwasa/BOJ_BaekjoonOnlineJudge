@@ -1,0 +1,48 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
+
+public class Main {
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
+		
+		int[][] arr = new int[N][M];	// -1 : 길 , 0 : 길아님
+		for (int i = 0; i < N; i++) {
+			String in = br.readLine();
+			for (int j = 0; j < M; j++) {
+				arr[i][j] = in.charAt(j)=='1'?-1:0;
+			}
+		}
+		
+		Queue<int[]> q = new LinkedList<int[]>();
+		q.add(new int[] {0, 0});
+		arr[0][0] = 1;
+		while (!q.isEmpty()) {
+			int[] tmp = q.poll();
+			if (tmp[0] == N-1 && tmp[1] == M-1) {
+				bw.write(arr[tmp[0]][tmp[1]] + "\n");
+				break;
+			}			
+			
+			if (tmp[0]>0&&arr[tmp[0]-1][tmp[1]]==-1) {arr[tmp[0]-1][tmp[1]]=arr[tmp[0]][tmp[1]]+1; q.add(new int[] {tmp[0]-1,tmp[1]});};
+			if (tmp[1]>0&&arr[tmp[0]][tmp[1]-1]==-1) {arr[tmp[0]][tmp[1]-1]=arr[tmp[0]][tmp[1]]+1; q.add(new int[] {tmp[0],tmp[1]-1});};
+			if (tmp[0]<N-1&&arr[tmp[0]+1][tmp[1]]==-1) {arr[tmp[0]+1][tmp[1]]=arr[tmp[0]][tmp[1]]+1; q.add(new int[] {tmp[0]+1,tmp[1]});};
+			if (tmp[1]<M-1&&arr[tmp[0]][tmp[1]+1]==-1) {arr[tmp[0]][tmp[1]+1]=arr[tmp[0]][tmp[1]]+1; q.add(new int[] {tmp[0],tmp[1]+1});};
+
+		}		
+			
+		bw.flush();		
+		bw.close();
+		br.close();
+	}
+}
