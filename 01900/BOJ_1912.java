@@ -8,29 +8,19 @@ import java.util.StringTokenizer;
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
-		int n = Integer.parseInt(br.readLine());
-		int[] in = new int[n];		
-		
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));		
+		int N = Integer.parseInt(br.readLine());		
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		for (int i = 0; i < n; i++) {			
-			in[i] = Integer.parseInt(st.nextToken());
+		int max = Integer.MIN_VALUE;
+		int sum = 0;
+		while(N-->0) {
+			int tmp = Integer.parseInt(st.nextToken());
+			max=tmp>max?tmp:max;
+			sum+=tmp;			
+			if (sum>0) {max=sum>max?sum:max;}
+			else sum=0;		
 		}
-		
-		int max = in[0];
-		for (int i = 1; i < n; i++) {			
-			if (in[i-1] > 0) {
-				int sum = in[i-1] + in[i];
-				if (sum > 0)
-					in[i] = sum;				
-			}
-			if (in[i] > max)
-				max = in[i];
-		}
-		
-		bw.write(max + "\n");
-		
+		bw.write(max + "\n");		
 		bw.flush();
 		br.close();
 		bw.close();		
