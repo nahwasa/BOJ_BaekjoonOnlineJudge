@@ -28,6 +28,6 @@ public class Main {
 		bw.write((vec.size())+"\n");
 		bw.flush();
 		bw.close();
-		br.close();
+		br.close(); 
 	}
 }
