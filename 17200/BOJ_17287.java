@@ -3,83 +3,33 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.HashMap;
 
 public class Main {	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		String s = br.readLine();
-		int[] score = new int[100];
-		Stack<Integer> stk = new Stack<Integer>();
-		LinkedList<Integer> ll;
-		int idx = 0;
+		HashMap<Character, Integer> hm = new HashMap<Character, Integer>();
+		initScore(hm);
+		int curScore = 0;
+		int maxScore = Integer.MIN_VALUE;
 		for (int i = 0; i < s.length(); i++) {
-			switch(s.charAt(i)) {
-			case '[' :
-				stk.push(-3);
-				break;
-			case '{' :
-				stk.push(-2);
-				break;
-			case '(' :
-				stk.push(-1);
-				break;
-			case ']' :
-				ll = new LinkedList<Integer>();
-				while (true) {
-					int tmp = stk.pop();					
-					if (tmp == -3)
-						break;
-					else
-						ll.add(tmp);									
-				}
-				for (int tt : ll) {
-					score[tt] += 3;
-					stk.push(tt);
-				}
-				break;
-			case '}' :
-				ll = new LinkedList<Integer>();
-				while (true) {
-					int tmp = stk.pop();					
-					if (tmp == -2)
-						break;
-					else
-						ll.add(tmp);									
-				}
-				for (int tt : ll) {
-					score[tt] += 2;
-					stk.push(tt);
-				}		
-				break;
-			case ')' :
-				ll = new LinkedList<Integer>();
-				while (true) {
-					int tmp = stk.pop();					
-					if (tmp == -1)
-						break;
-					else
-						ll.add(tmp);									
-				}
-				for (int tt : ll) {
-					score[tt] += 1;
-					stk.push(tt);
-				}		
-				break;
-			default :
-				stk.push(idx++);
-			}
+			if (hm.containsKey(s.charAt(i))) curScore+=hm.get(s.charAt(i));
+			else if (curScore>maxScore) maxScore=curScore;
 		}
-		int max = 0;		
-		for (int scr : score) {			
-			if (scr > max)
-				max = scr;
-		}		
-		bw.write(max + "\n");
+		bw.write(maxScore+"\n");	
 		bw.flush();
 		bw.close();
 		br.close();
-	}	
+	}
+	
+	private static void initScore(HashMap<Character, Integer> hm) {
+		hm.put('[', 3);
+		hm.put('{', 2);
+		hm.put('(', 1);
+		hm.put(']', -3);
+		hm.put('}', -2);
+		hm.put(')', -1);
+	}
 }
