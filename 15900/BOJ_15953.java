@@ -18,7 +18,7 @@ public class Main {
 			int tmp1 = cp1[Integer.parseInt(st.nextToken())];
 			int tmp2 = cp2[Integer.parseInt(st.nextToken())];			
 			bw.write(String.format("%d\n", (tmp1+tmp2)*10000));
-		}
+		} 
 		bw.flush();
 		bw.close();
 		br.close();
