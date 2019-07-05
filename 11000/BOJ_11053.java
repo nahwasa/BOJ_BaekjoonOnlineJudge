@@ -3,9 +3,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Collections;
 import java.util.StringTokenizer;
-import java.util.Vector;
+import java.util.TreeSet;
 
 public class Main {	
 	public static void main(String[] args) throws IOException {
@@ -16,13 +15,12 @@ public class Main {
 		int[] arr = new int[N];
 		for (int i = 0; i < N; i++)
 			arr[i] = Integer.parseInt(st.nextToken());
-		Vector<Integer> v = new Vector<Integer>();
+		TreeSet<Integer> v = new TreeSet<Integer>();
 		v.add(0);
 		for (int num : arr) {
-			if (v.lastElement() < num) {v.add(num); continue;}
-			int tmp = Collections.binarySearch(v, num);			
-			if (tmp >= 0) v.set(tmp, num);
-			else v.set(-tmp-1, num);				
+			if (v.last() > num) 
+				v.remove(v.ceiling(num));
+			v.add(num);
 		}
 		bw.write((v.size()-1) + "\n");
 		bw.flush();
