@@ -1,7 +1,6 @@
 # BOJ
--BOJ(Baekjun Online Judge) Algorithm with Java
-백준 온라인 저지( https://www.acmicpc.net/ ) 에서
-해결한 알고리즘 문제들을 업로드합니다.
+-BOJ(Baekjun Online Judge)
+백준 온라인 저지( https://www.acmicpc.net/ ) 에서 해결한 문제들을 업로드합니다.
 
 -문제제목에 해당하는 커밋 코멘트에 설명을 적어뒀습니다.
 
