@@ -14,12 +14,11 @@ public class Main {
 		
 		while (true) {
 			String s = br.readLine();
-			if (s.equals("0 0"))
-				break;
+			if (s.equals("0 0")) break;
 			StringTokenizer st = new StringTokenizer(s);
 			int M = Integer.parseInt(st.nextToken());
 			int N = Integer.parseInt(st.nextToken());
-			boolean[][] map = new boolean[N][M];			
+			boolean[][] map = new boolean[N][M];
 			for (int i = 0; i < N; i++) {
 				st = new StringTokenizer(br.readLine());
 				for (int j = 0; j < M; j++) {
@@ -28,27 +27,11 @@ public class Main {
 				}
 			}
 			int cnt = 0;
-			for (int i = 0; i < N; i++) {				
+			for (int i = 0; i < N; i++) {
 				for (int j = 0; j < M; j++) {
 					if (map[i][j]) {
 						cnt++;
-						Queue<Pos> q = new LinkedList<Pos>();
-						q.add(new Pos(i, j));
-						map[i][j] = false;
-						
-						while (!q.isEmpty()) {
-							Pos tmp = q.poll();
-							int x = tmp.x;
-							int y = tmp.y;
-							if (x>0&&map[x-1][y]) {map[x-1][y]=false; q.add(new Pos(x-1,y));}
-							if (y>0&&map[x][y-1]) {map[x][y-1]=false; q.add(new Pos(x,y-1));}
-							if (x<N-1&&map[x+1][y]) {map[x+1][y]=false; q.add(new Pos(x+1,y));}
-							if (y<M-1&&map[x][y+1]) {map[x][y+1]=false; q.add(new Pos(x,y+1));}
-							if (x>0&&y>0&&map[x-1][y-1]) {map[x-1][y-1]=false; q.add(new Pos(x-1,y-1));}
-							if (x>0&&y<M-1&&map[x-1][y+1]) {map[x-1][y+1]=false; q.add(new Pos(x-1,y+1));}
-							if (x<N-1&&y>0&&map[x+1][y-1]) {map[x+1][y-1]=false; q.add(new Pos(x+1,y-1));}
-							if (x<N-1&&y<M-1&&map[x+1][y+1]) {map[x+1][y+1]=false; q.add(new Pos(x+1,y+1));}
-						}
+						bfs(map, i, j);
 					}
 				}
 			}
@@ -58,13 +41,33 @@ public class Main {
 		bw.close();
 		br.close();
 	}
+	
+	private static void bfs(boolean[][] map, int i, int j) {
+		Queue<Pos> q = new LinkedList<Pos>();
+		q.add(new Pos(i, j));
+		map[i][j] = false;
+		
+		while (!q.isEmpty()) {
+			Pos tmp = q.poll();
+			int x = tmp.x;
+			int y = tmp.y;
+			for (int dx = -1; dx <= 1; dx++) {
+				for (int dy = -1; dy <= 1; dy++) {
+					int rx=x+dx;
+					int ry=y+dy;
+					if (rx<0||rx>=map.length||ry<0||ry>=map[0].length||!map[rx][ry])
+						continue;
+					map[rx][ry]=false;
+					q.add(new Pos(rx, ry));
+				}
+			}
+		}
+	}
 }
 
 class Pos {
-	int x;
-	int y;
+	int x,y;
 	public Pos(int x, int y) {
-		super();
 		this.x = x;
 		this.y = y;
 	}
