@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <math.h>
 using namespace std;
 
 int main(){
@@ -27,7 +28,7 @@ int main(){
          }
       }
       long long tmp = 1;
-      for (long long l = 1; ; l++) {
+      for (long long l = sqrt(pow(2, s.length()-1)); ; l++) {
          tmp = l * l;
          if ((tmp&bit0Chk) == 0 && (tmp&bit1Chk) == bit1Chk)
             break;
