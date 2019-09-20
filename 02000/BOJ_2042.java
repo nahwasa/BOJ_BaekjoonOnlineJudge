@@ -6,22 +6,41 @@ import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
 public class Main {
-	private static long init(long[] arr, long[] seg, int n, int s, int e) {
-		return s==e?(seg[n]=arr[s]):(seg[n] = init(arr,seg,n*2,s,(s+e)/2) + init(arr,seg,n*2+1,(s+e)/2+1,e));
+	private static long[] arr, seg;
+	
+	// make seg tree
+	private static void init(int n, int s, int e) {
+		if (s==e) {
+			seg[n] = arr[s];
+			return;
+		}
+		init(n*2,s,(s+e)/2);
+		init(n*2+1,(s+e)/2+1,e);
+		seg[n] = seg[n*2] + seg[n*2+1];
 	}
 
-	private static void update(long[] seg, int n, int s, int e, int idx, long diff) {
-		if (idx<s || idx>e) return;
+	// update value
+	private static void update(int n, int s, int e, int idx, long diff) {
+		if (idx<s || idx>e)
+			return;
+		if (s==e) {
+			seg[n] += diff;
+			return;
+		}
+		update(n*2,s,(s+e)/2,idx,diff);
+		update(n*2+1,(s+e)/2+1,e,idx,diff);
 		seg[n] += diff;
-		if (s==e) 			return;
-		update(seg,n*2,s,(s+e)/2,idx,diff);
-		update(seg,n*2+1,(s+e)/2+1,e,idx,diff);
 	}
 	
-	private static long sum(long[] seg, int n, int s, int e, int l, int r) {
-		if (l>e || r<s) 	return 0;
-		if (l<=s && e<=r) 	return seg[n];
-		return sum(seg,n*2,s,(s+e)/2,l,r) + sum(seg,n*2+1,(s+e)/2+1,e,l,r);
+	// query
+	private static long query(int n, int s, int e, int l, int r) {
+		if (l>e || r<s)
+			return 0;
+		if (l<=s && e<=r)
+			return seg[n];
+		long q1 = query(n*2,s,(s+e)/2,l,r);
+		long q2 = query(n*2+1,(s+e)/2+1,e,l,r);
+		return q1 + q2;
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -31,11 +50,11 @@ public class Main {
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken()) + Integer.parseInt(st.nextToken());
 		int h = (int)Math.ceil(Math.log(N) / Math.log(2));
-		long[] arr = new long[N];
-		long[] seg = new long[1<<(h+1)];
+		arr = new long[N];
+		seg = new long[1<<(h+1)];
 		for (int i = 0; i < N; i++)
 			arr[i] = Integer.parseInt(br.readLine());
-		init(arr, seg, 1, 0, N-1);
+		init(1, 0, N-1);
 		while (M-->0) {
 			st = new StringTokenizer(br.readLine());			
 			if (Integer.parseInt(st.nextToken())==1) {	//change arr[target] to value
@@ -43,15 +62,15 @@ public class Main {
 				long value = Long.parseLong(st.nextToken());
 				long diff = value - arr[target];
 				arr[target] = value;
-				update(seg, 1, 0, N-1, target, diff);
+				update(1, 0, N-1, target, diff);
 			} else {	//print sum between [l] to [r]
 				int l = Integer.parseInt(st.nextToken()) - 1;
 				int r = Integer.parseInt(st.nextToken()) - 1;
-				bw.write(sum(seg, 1, 0, N-1, l, r) + "\n");
+				bw.write(query(1, 0, N-1, l, r) + "\n");
 			}
 		}
 		bw.flush();
 		bw.close();
 		br.close();
-	}	
+	}
 }
