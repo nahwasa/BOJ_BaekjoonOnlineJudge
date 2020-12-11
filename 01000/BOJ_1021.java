@@ -40,12 +40,14 @@ public class Main {
 				if (idx == 0) {
 					dq.pollFirst();
 					break;
-				} else if (dq.size() / 2 >= idx) {					
-					cnt++;
-					dq.addLast(dq.pollFirst());
-				} else {					
-					cnt++;
-					dq.addFirst(dq.pollLast());					
+				} else if (dq.size() / 2 >= idx) {
+					cnt+=idx;
+					while (idx-->0)
+						dq.addLast(dq.pollFirst());
+				} else {
+					cnt+=dq.size()-idx;
+					while(idx++<dq.size())
+						dq.addFirst(dq.pollLast());					
 				}		
 			}
 		}
