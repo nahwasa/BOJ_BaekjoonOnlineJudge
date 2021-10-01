@@ -7,10 +7,10 @@ public class Main {
         int[] arr = new int[1<<10];
         while (n-->0) {
             String cur = nextLine();
-            int bitMasking = 0;
+            int groupNum = 0;
             for (int i = 0; i < cur.length(); i++)
-                bitMasking |= 1<<(cur.charAt(i) - '0');
-            arr[bitMasking]++;
+                groupNum |= 1<<(cur.charAt(i) - '0');
+            arr[groupNum]++;
         }
 
         long answer = 0;
