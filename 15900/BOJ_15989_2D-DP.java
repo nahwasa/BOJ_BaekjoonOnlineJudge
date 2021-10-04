@@ -7,7 +7,7 @@ public class Main {
         int t = nextInt();
         StringBuilder sb = new StringBuilder();
         int chkMax = 1;
-        int[][] dp = new int[Math.max(4, 10000+1)][4];
+        int[][] dp = new int[10000+1][4];
         dp[1][1] = dp[2][2] = dp[3][3] = 1;
         while (t-->0) {
             int n = nextInt();
