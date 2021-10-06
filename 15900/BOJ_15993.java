@@ -16,7 +16,6 @@ public class Main {
             }
         }
         int t = nextInt();
-        String s;
         StringBuilder sb = new StringBuilder();
         while (t-->0) {
             int cur = nextInt();
