@@ -1,7 +1,7 @@
 import java.io.DataInputStream;
 import java.io.IOException;
 
-public class Main2 {
+public class Main {
     private static void solution() throws Exception {
         long[][] dp = new long[2][1000001];
         dp[0][1] = 7;
