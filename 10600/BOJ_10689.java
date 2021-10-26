@@ -14,14 +14,10 @@ public class Main {
         for (int tc = 1; tc <= t; tc++) {
             HashSet<Integer> hs = new HashSet<>();
             int n = nextInt();
-            int tmp = 0;
             int ans = 0;
             for (int i = 1; i <= n; i++) {
-                hs.add(nextInt());
-                if (hs.size() > tmp) {
+                if (hs.add(nextInt()))
                     ans = i;
-                    tmp = hs.size();
-                }
             }
             print(tc, ans);
         }
