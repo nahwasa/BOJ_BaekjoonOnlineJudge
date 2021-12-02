@@ -13,10 +13,9 @@ public class Main {
         Stack<Integer> stk = new Stack<>();
         for (int i = 0; i < s.length(); i++) {
             switch (s.charAt(i)) {
-                case '(' : lv++; stk.push(OPEN_BRACKET); break;
-                case ')' : lv--; stk.pop(); break;
+                case '(' : lv++; maxLv = Math.max(maxLv, lv); break;
+                case ')' : lv--; break;
             }
-            maxLv = Math.max(maxLv, lv);
         }
         return maxLv;
     }
@@ -55,7 +54,7 @@ public class Main {
             if (s.charAt(1) == ')') break; // EOF
             answer.append(tc++).append('.').append(' ').append(getTreeResult(s) ? "true" : "false").append('\n');
         }
-        System.out.println(answer);
+        System.out.print(answer);
     }
 
     public static void main(String[] args) throws Exception {
