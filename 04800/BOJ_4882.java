@@ -10,7 +10,6 @@ public class Main {
     private int getDeepestLevel(String s) {
         int maxLv = 0;
         int lv = 0;
-        Stack<Integer> stk = new Stack<>();
         for (int i = 0; i < s.length(); i++) {
             switch (s.charAt(i)) {
                 case '(' : lv++; maxLv = Math.max(maxLv, lv); break;
