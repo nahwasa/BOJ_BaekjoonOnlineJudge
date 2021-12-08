@@ -1,48 +1,32 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
-		int n = Integer.parseInt(br.readLine());
-		
-		for (int i = 0; i < n; i++) {
-			StringTokenizer st = new StringTokenizer(br.readLine());
-			int x = Integer.parseInt(st.nextToken());
-			int y = Integer.parseInt(st.nextToken());
-			
-			int cnt = 0;
-			int xTmp = 0;
-			int yTmp = 0;
-			while(true) {
-				xTmp++;
-				yTmp++;
-				
-				x += xTmp;
-				cnt++;
-				if (x >= y)
-					break;
-				
-				y -= yTmp;
-				cnt++;
-				if (x >= y)
-					break;	
-				
-			}
-			bw.write(cnt + "\n");
-			
-		}
-		
-		
-		
-		bw.flush();
-		br.close();
-		bw.close();		
-	}	
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    private int getMinCnt(int x, int y) {
+        int i = 0;
+        while (x<y) {
+            x += ++i;
+            y -= i;
+        }
+        return x>=y+i ? 2*i-1 : 2*i;
+    }
+
+    private void solution() throws Exception {
+        int t = Integer.parseInt(br.readLine());
+        StringBuilder sb = new StringBuilder();
+        while (t-->0) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
+            sb.append(getMinCnt(x, y)).append('\n');
+        }
+        System.out.print(sb);
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Main().solution();
+    }
 }
