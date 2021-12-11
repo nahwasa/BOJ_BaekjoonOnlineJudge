@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 
 class Query implements Comparable<Query> {
     int a, b, idx;
@@ -25,22 +24,21 @@ class Query implements Comparable<Query> {
 }
 
 public class Main extends FastInput {
-    private HashSet<Integer> answer = new HashSet<>();
+    private int answerCnt = 0;
     private int[] cnt;
 
-    private void chkAnswer(int num) {
-        if (cnt[num] == 2) answer.add(num);
-        else if (answer.contains(num)) answer.remove(num);
-    }
-
     private void pushNum(int num) {
-        ++cnt[num];
-        chkAnswer(num);
+        switch (++cnt[num]) {
+            case 2 : answerCnt++; break;
+            case 3 : answerCnt--; break;
+        }
     }
 
     private void popNum(int num) {
-        --cnt[num];
-        chkAnswer(num);
+        switch (--cnt[num]) {
+            case 1 : answerCnt--; break;
+            case 2 : answerCnt++; break;
+        }
     }
 
     private int[] findQueryResult(int[] arr, int q, ArrayList<Query> queries) {
@@ -50,7 +48,7 @@ public class Main extends FastInput {
         for (int i = first.a; i <= first.b; i++) {
             pushNum(arr[i]);
         }
-        queryResult[first.idx] = answer.size();
+        queryResult[first.idx] = answerCnt;
 
         for (int queryIdx = 1; queryIdx < q; queryIdx++) {
             Query cur = queries.get(queryIdx);
@@ -61,7 +59,7 @@ public class Main extends FastInput {
             for (int i = bf.b+1; i <= cur.b; i++) pushNum(arr[i]);
             for (int i = cur.b+1; i <= bf.b; i++) popNum(arr[i]);
 
-            queryResult[cur.idx] = answer.size();
+            queryResult[cur.idx] = answerCnt;
         }
         return queryResult;
     }
