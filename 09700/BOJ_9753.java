@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 
 public class Main {
-    private static final int MAX = 51111;
+    private static final int MAX = 50000;
     TreeSet<Integer> pnMult;
 
     private void initPrimeNum() {
