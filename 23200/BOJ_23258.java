@@ -8,10 +8,8 @@ public class Main extends FastInput {
         for (int k = 1; k <= n; k++) {
             for (int i = 1; i <= n; i++) {
                 for (int j = 1; j <= n; j++) {
-                    if (i == j || i == k || k == j)
-                        arr[i][j][k] = arr[i][j][k-1];
-                    else
-                        arr[i][j][k] = Math.min(arr[i][j][k-1], arr[i][k][k-1] + arr[k][j][k-1]);
+                    if (i == j) continue;
+                    arr[i][j][k] = Math.min(arr[i][j][k-1], arr[i][k][k-1] + arr[k][j][k-1]);
                 }
             }
         }
