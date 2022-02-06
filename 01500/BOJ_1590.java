@@ -14,7 +14,7 @@ public class Main {
             int s = Integer.parseInt(st.nextToken());
             int i = Integer.parseInt(st.nextToken());
             int c = Integer.parseInt(st.nextToken());
-            while (s < t && --c>0) s+=i;
+            while (s < t && --c>0 && s < answer) s+=i;
             if (s >= t) answer = Math.min(s, answer);
         }
         System.out.println(answer == Integer.MAX_VALUE ? -1 : answer-t);
