@@ -31,14 +31,9 @@ public class Main {
         int sum = 0;
         int cnt = 0;
         while (st != pn.size()-1 || ed != pn.size()-1) {
-            if (sum < n) {
-                if (ed == pn.size()-1) {
-                    sum -= pn.get(++st);
-                } else {
-                    sum += pn.get(++ed);
-                }
-            }
-            else if (sum >= n)
+            if (sum < n && ed != pn.size()-1)
+                sum += pn.get(++ed);
+            else
                 sum-=pn.get(++st);
 
             if (sum == n) cnt++;
