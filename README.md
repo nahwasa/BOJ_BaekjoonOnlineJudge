@@ -1,5 +1,5 @@
 # BOJ
--BOJ(Baekjun Online Judge)
+-BOJ(Baekjoon Online Judge)
 백준 온라인 저지( https://www.acmicpc.net/ ) 에서 해결한 문제들을 업로드합니다.
 
 -설명이 필요한 문제는 커밋 코멘트에 설명을 적어뒀습니다.
