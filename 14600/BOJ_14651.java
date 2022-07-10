@@ -5,20 +5,16 @@ public class Main {
     private static final int MOD = 1_000_000_009;
     private void solution() throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine())-1;
-        int[] dp = {0,1,1};
-        while (n-->0) {
-            int[] tmp = new int[3];
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
-                    int idx = (i+j)%3;
-                    tmp[idx]+=dp[j];
-                    tmp[idx]%=MOD;
-                }
-            }
-            dp = tmp;
+        int n = Integer.parseInt(br.readLine());
+        if (n==1) {
+            System.out.println(0);
+            return;
         }
-        System.out.println(dp[0]);
+        int answer = 2;
+        for (int i = 2; i < n; i++) {
+            answer = (int) (1l*answer*3%MOD);
+        }
+        System.out.println(answer);
     }
 
     public static void main(String[] args) throws Exception {
