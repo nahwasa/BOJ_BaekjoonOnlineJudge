@@ -16,21 +16,21 @@ public class Main {
 
         while (m-->0) {
             st = new StringTokenizer(br.readLine());
-            int op = Integer.parseInt(st.nextToken());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
-            switch (op) {
+            int c = Integer.parseInt(st.nextToken());
+            switch (a) {
                 case 1 :
-                    arr[a] = b;
+                    arr[b] = c;
                     break;
                 case 2 :
-                    for (int i = a; i <= b; i++) arr[i]^=1;
+                    for (int i = b; i <= c; i++) arr[i]^=1;
                     break;
                 case 3 :
-                    for (int i = a; i <= b; i++) arr[i] = 0;
+                    for (int i = b; i <= c; i++) arr[i] = 0;
                     break;
                 case 4 :
-                    for (int i = a; i <= b; i++) arr[i] = 1;
+                    for (int i = b; i <= c; i++) arr[i] = 1;
                     break;
             }
         }
