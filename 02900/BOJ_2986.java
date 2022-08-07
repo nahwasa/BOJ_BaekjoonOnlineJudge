@@ -6,7 +6,11 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
         int sqrtN = (int) Math.sqrt(N);
-        for (int i = 2; i <= sqrtN; i++) {
+        if (N%2 == 0) {
+            System.out.println(N/2);
+            return;
+        }
+        for (int i = 3; i <= sqrtN; i+=2) {
             if (N%i == 0) {
                 System.out.println(N-N/i);
                 return;
