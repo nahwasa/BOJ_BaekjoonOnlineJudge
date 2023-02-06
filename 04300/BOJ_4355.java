@@ -7,6 +7,10 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         long n = -1;
         while ( (n = Long.parseLong(br.readLine())) != 0 ) {
+            if (n == 1) {
+                sb.append(0).append('\n');
+                continue;
+            }
             long div = 2;
             long res = n;
             while (n != 1) {
