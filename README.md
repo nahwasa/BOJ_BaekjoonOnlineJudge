@@ -10,3 +10,27 @@
 -올리면 안되거나, 올릴 의미가 없는 문제는 올리지 않습니다. (백준 7대난제, 랜덤게임 종류 등)
 
 -.java : 자바 / .cs : C# / .py : 파이썬 /  등
+
+```mermaid
+classDiagram
+      Animal <|-- Duck
+      Animal <|-- Fish
+      Animal <|-- Zebra
+      Animal : +int age
+      Animal : +String gender
+      Animal: +isMammal()
+      Animal: +mate()
+      class Duck{
+          +String beakColor
+          +swim()
+          +quack()
+      }
+      class Fish{
+          -int sizeInFeet
+          -canEat()
+      }
+      class Zebra{
+          +bool is_wild
+          +run()
+      }
+```
