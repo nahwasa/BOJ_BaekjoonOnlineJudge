@@ -1,0 +1,34 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in), 1<<16);
+
+    public static void main(String[] args) throws Exception {
+        new Main().solution();
+    }
+
+    private void solution() throws Exception {
+        int n = Integer.parseInt(br.readLine());
+        String[] arr = new String[n+1];
+        for (int i = 1; i <= n; i++) {
+            arr[i] = br.readLine();
+        }
+
+        StringBuilder sb = new StringBuilder();
+        int t = Integer.parseInt(br.readLine());
+        while (t-->0) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+
+            for (int i = a; i <= b; i++) {
+                sb.append(arr[i]).append('\n');
+            }
+        }
+
+        System.out.print(sb);
+    }
+}
